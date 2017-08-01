@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include "../../src/neurons/Neuron.h"
+#include "../../src/neural/Neuron.h"
 
 namespace {
   //The fixture for testing class Neuron
