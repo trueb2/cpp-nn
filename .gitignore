@@ -33,3 +33,5 @@ workspace.xml
 *.exe
 *.out
 *.app
+
+\.idea/dictionaries/

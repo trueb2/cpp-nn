@@ -69,7 +69,7 @@ public:
    */
   ~Neuron();
 
-private:
+protected:
   static int idCounter;
   int id;
 
