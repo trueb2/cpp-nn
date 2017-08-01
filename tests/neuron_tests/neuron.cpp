@@ -43,4 +43,37 @@ namespace {
       ASSERT_GT(1e-100, weights[i]) << "Expecting a newly instantiated neuron to have near 0 weights";
     }
   }
+
+  TEST_F(NeuronTest, CanSetWeightsValues) {
+    double weights[] = {1.0, 2.0, 3.0, 4.0};
+    neuron->setWeights(weights, 4);
+
+    ASSERT_EQ(4, neuron->getLength());
+
+    double* neuronWeights = neuron->getWeights();
+    for(int i = 0; i < 4; i++) {
+      ASSERT_EQ(neuronWeights[i], weights[i]);
+    }
+  }
+
+  TEST_F(NeuronTest, CannotSetWeigthsToEmpty) {
+    double weights[] = {};
+    EXPECT_DEATH(neuron->setWeights(weights, 0), "Assertion `length > 0' failed");
+  }
+
+  TEST_F(NeuronTest, CanDotWeightsWithNeuron) {
+    double w1[] = { 1.0, 2.0, 3.0, 4.0};
+    double w2[] = { 5.0, 6.0, 7.0, 8.0};
+
+    neuron->setWeights(w1, 4);
+    ASSERT_EQ(70, neuron->dot(w2, 4));
+  }
+
+  TEST_F(NeuronTest, CannotDotMismatchedWeights) {
+    double w1[] = { 1.0, 2.0, 3.0, 4.0};
+    double w2[] = { 5.0, 6.0, 7.0, 8.0, 9.0};
+
+    neuron->setWeights(w1, 4);
+    EXPECT_DEATH(neuron->dot(w2, 5), "Assertion `this->getLength\\(\\) == length' failed");
+  }
 } // namespace
