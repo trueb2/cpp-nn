@@ -23,6 +23,11 @@ public:
   double dot(const double* weights, const int length);
 
   /**
+   * resetIdCounter - sets the static idCounter member to 0 to reset id values
+   */
+  static void resetIdCounter();
+
+  /**
    * setWeights - sets the weights of the Neuron with the supplied length
    *
    * @param weights - The new weights copied for the Neuron
@@ -46,7 +51,14 @@ public:
   int getLength();
 
   /**
-   * Neuron(length) - Instantiates a Neuron with an array of [length] weights, each roughly equal to 0.0
+   * getId - returns the unique id of the Neuron
+   * @return id - 0-indexed id
+   */
+  int getId();
+
+  /**
+   * Neuron(length) - Instantiates a Neuron with an array of [length] weights, each roughly equal to 0.0.
+   * Assigns a unique id to each Neuron.
    *
    * @param length - The length of the weights array
    */
@@ -58,6 +70,10 @@ public:
   ~Neuron();
 
 private:
+  static int idCounter;
+  int id;
+
+
   double* weights;
   int length;
 

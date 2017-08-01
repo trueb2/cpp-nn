@@ -26,6 +26,7 @@ namespace {
     virtual void TearDown() {
       // called immediately after each test before the destructor
       delete neuron;
+      Neuron::resetIdCounter();
     }
 
     // objects declared here can be used by all tests in the test case for Foobar
@@ -75,5 +76,18 @@ namespace {
 
     neuron->setWeights(w1, 4);
     EXPECT_DEATH(neuron->dot(w2, 5), "Assertion `this->getLength\\(\\) == length' failed");
+  }
+
+  TEST_F(NeuronTest, HasUniqueIds) {
+    delete neuron;
+    Neuron::resetIdCounter();
+
+    neuron = new Neuron(5);
+    Neuron neuron1(5);
+    Neuron neuron2(5);
+
+    ASSERT_EQ(neuron->getId(), 0);
+    ASSERT_EQ(neuron1.getId(), 1);
+    ASSERT_EQ(neuron2.getId(), 2);
   }
 } // namespace

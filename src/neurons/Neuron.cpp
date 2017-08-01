@@ -2,10 +2,13 @@
 // Created by jwtrueb on 7/31/17.
 //
 
-#include <assert.h>
+#include <cassert>
 #include "Neuron.h"
 
+int Neuron::idCounter = 0;
+
 Neuron::Neuron(int length): length(length) {
+  id = idCounter++;
   weights = new double[length];
   for(int i = 0; i < length; i++) {
     weights[i] = 0.0;
@@ -14,6 +17,10 @@ Neuron::Neuron(int length): length(length) {
 
 Neuron::~Neuron() {
   delete[] weights;
+}
+
+void Neuron::resetIdCounter() {
+  idCounter = 0;
 }
 
 void Neuron::setWeights(const double* weights, const int length) {
@@ -39,6 +46,10 @@ double* Neuron::getWeights() {
 
 int Neuron::getLength() {
   return length;
+}
+
+int Neuron::getId() {
+  return id;
 }
 
 double Neuron::dot(const double* weights, const int length) {
