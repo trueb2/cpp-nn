@@ -27,6 +27,16 @@ public:
   ~NeuralLayer();
 
   /**
+   * Resets the id counter to 0
+   */
+  static void resetIdCounter();
+
+  /**
+   * Returns the unique id of the neural layer, starting at 0.
+   */
+  int getId();
+
+  /**
    * Get the total number of Neurons in this NeuralLayer
    *
    * @return count - The number of Neurons for the NeuralLayer
@@ -48,6 +58,9 @@ public:
   std::string getActivationFunctionName();
 
 private:
+  static int idCounter;
+  int id;
+
   int neuronCount;
   int neuronLength;
   ActivationFunction* activationFunction;

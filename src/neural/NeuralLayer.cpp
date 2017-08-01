@@ -4,6 +4,8 @@
 
 #include "NeuralLayer.h"
 
+int NeuralLayer::idCounter = 0;
+
 NeuralLayer::NeuralLayer(int neuronCount, int neuronLength, ActivationFunction *activationFunction):
   neuronCount(neuronCount), neuronLength(neuronLength), activationFunction(activationFunction)
 {
@@ -11,6 +13,8 @@ NeuralLayer::NeuralLayer(int neuronCount, int neuronLength, ActivationFunction *
   for(int i = 0; i < neuronCount; i++) {
     neurons[i] = new Neuron(neuronLength);
   }
+
+  id = idCounter++;
 }
 
 NeuralLayer::~NeuralLayer() {
@@ -19,6 +23,14 @@ NeuralLayer::~NeuralLayer() {
   }
 
   delete [] neurons;
+}
+
+void NeuralLayer::resetIdCounter() {
+  idCounter = 0;
+}
+
+int NeuralLayer::getId() {
+  return id;
 }
 
 int NeuralLayer::getNeuronCount() {

@@ -38,4 +38,17 @@ namespace {
     ASSERT_EQ(3, nl.getNeuronLength());
     ASSERT_EQ("Sigmoid", nl.getActivationFunctionName());
   }
+
+  TEST_F(NeuralLayerTest, MultipleLayersHaveUniqueIds) {
+    NeuralLayer::resetIdCounter();
+
+    SigmoidFunction sigmoid;
+    NeuralLayer nl(1,1,&sigmoid);
+    NeuralLayer nl1(2,2,&sigmoid);
+    NeuralLayer nl2(3,3,&sigmoid);
+
+    ASSERT_EQ(0, nl.getId());
+    ASSERT_EQ(1, nl1.getId());
+    ASSERT_EQ(2, nl2.getId());
+  }
 } // namespace
