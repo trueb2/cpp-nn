@@ -14,7 +14,6 @@
 
 
 #include "OutputAdapter.h"
-#include "Output.h"
 
 class OneHotAdapter : public OutputAdapter {
 public:
@@ -36,7 +35,7 @@ public:
    * @param neuralLayerOutput - result from each Neuron in NeuralLayer
    * @return oneHot - bool* of length this->length
    */
-  Output* transform(double* neuralLayerOutput, int neuronCount);
+  void* transform(double* neuralLayerOutput, int neuronCount);
 
 private:
   int length;

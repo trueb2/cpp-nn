@@ -10,8 +10,6 @@
 #define CPPNN_OUTPUTADAPTER_H
 
 
-#include "Output.h"
-
 class OutputAdapter {
   /**
    * Takes the output of a NeuralLayer and converts it
@@ -20,7 +18,7 @@ class OutputAdapter {
    * @param neuralLayerOutput - The output of a NeuralLayer
    * @return transformedOutput - The desired output format
    */
-  virtual Output* transform(double* neuralLayerOutput, int neuronCount) = 0;
+  virtual void* transform(double* neuralLayerOutput, int neuronCount) = 0;
 };
 
 

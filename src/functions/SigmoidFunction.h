@@ -19,6 +19,16 @@ public:
   double evaluate(double arg);
 
   /**
+   * Computes the derivative of the Sigmoid function for
+   * an already computed Sigmoid function, arg
+   *
+   * @param arg - The value of a Sigmoid function for a value
+   * @return derivative - The value of the derivative of the Sigmoid
+   * value at arg's evaluation point
+   */
+  double evaluateDerivative(double arg);
+
+  /**
    * Get the string "Sigmoid" as the name of this activation function
    *
    * @return name - The name of this activation function

@@ -19,6 +19,6 @@ download_project(
 
 add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
 
-set(test_SRCS neuron_tests/neuron.cpp neuron_tests/neural_layer.cpp)
+set(test_SRCS neuron_tests/neuron.cpp neuron_tests/neural_layer.cpp neuron_tests/neural_network.cpp)
 add_executable(runUnitTests gtest.cpp ${test_SRCS})
 target_link_libraries(runUnitTests gtest gmock core)
