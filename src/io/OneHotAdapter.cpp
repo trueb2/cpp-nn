@@ -2,7 +2,6 @@
 // Created by jwtrueb on 8/1/17.
 //
 
-#include <cfloat>
 #include "OneHotAdapter.h"
 
 OneHotAdapter::OneHotAdapter(int length) : length(length) {};
@@ -15,11 +14,11 @@ void* OneHotAdapter::transform(double *neuralLayerOutput, int neuronCount) {
   return output;
 }
 
-void * OneHotAdapter::outputError(void *outputAdapterOutput, void *truthOutput, int outputLength) {
+void * OneHotAdapter::outputError(void* outputAdapterOutput, void* targetOutput, int outputLength) {
   double* error = new double[outputLength];
 
   double* calculated = (double*) outputAdapterOutput;
-  double* target = (double*) truthOutput;
+  double* target = (double*) targetOutput;
   for(int i = 0; i < outputLength; i++) {
     error[i] = target[i] - calculated[i];
   }

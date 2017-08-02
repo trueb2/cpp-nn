@@ -54,9 +54,7 @@ std::string NeuralLayer::getActivationFunctionName() {
 double * NeuralLayer::passForward(double* input, int inputLength) {
   assert(neuronLength == inputLength);
 
-  if(artifacts != nullptr) {
-    delete artifacts;
-  }
+  delete artifacts;
 
   artifacts = new double[neuronCount];
   double* retArtifacts = new double[neuronCount];

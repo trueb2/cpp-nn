@@ -1,14 +1,12 @@
 /**
  * OneHotAdapter.h
  *
- * Produces a one-hot vector output for a neuralLayer
- *
- * Accepts the final output of a NeuralLayer, and
- * produces the desired format of output
+ * Represents a one-hot vector output from the NeuralNetwork.
+ * It accepts the output from the final layer of the NeuralNetwork and
+ * can compute the margin of error with one hot targetOutputs.
  *
  * @author Jacob Trueb
  */
-
 #ifndef CPPNN_ONEHOTADAPTER_H
 #define CPPNN_ONEHOTADAPTER_H
 
@@ -42,11 +40,11 @@ public:
    * transform output.
    *
    * @param outputAdapterOutput - A double* array of output from transform
-   * @param truthOutput - A double* array of truth
+   * @param targetOutput - A double* array of truth
    * @param outputLength - The length of outputAdapterOutput, truthOutput, and error
    * @return error - A double* array of margin of error on each index
    */
-  void *outputError(void *outputAdapterOutput, void *truthOutput, int outputLength);
+  void *outputError(void *outputAdapterOutput, void *targetOutput, int outputLength);
 
 
 private:

@@ -14,6 +14,7 @@
 #include <gdbm.h>
 
 class Input {
+public:
   /**
    * Creates an Input with the data and label provided
    *
