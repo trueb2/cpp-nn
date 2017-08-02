@@ -27,6 +27,9 @@ class InputNeuron : public Neuron {
    * Frees space allocated by InputNeuron
    */
   ~InputNeuron();
+
+public:
+  double* copyWeights();
 };
 
 

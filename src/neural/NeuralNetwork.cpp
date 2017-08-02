@@ -35,11 +35,18 @@ void NeuralNetwork::train(InputNeuron** inputNeurons, int inputNeuronsLength) {
 void* NeuralNetwork::evaluate(InputNeuron* inputNeuron) {
   assert(inputNeuron->getLength() == neuralLayers[0]->getNeuronLength());
 
-  //TODO: Implement Forward Propagation
+  // Forward Propagation
+  double* input = inputNeuron->copyWeights();
+  int inputLength = inputNeuron->getLength();
+  for(int i = 0; i < layerCount; i++) {
+    double* output = neuralLayers[i]->passForward(input, inputLength);
+    delete input;
+    input = output;
+    inputLength = neuralLayers[i]->getNeuronCount();
+  }
 
-  //TODO: Transform Forward Propagation with OutputAdapter
-
-  //TODO: Store artifacts from propagation
+  // Convert output
+  return outputAdapter->transform(input, inputLength);
 }
 
 int NeuralNetwork::getLayerCount() {

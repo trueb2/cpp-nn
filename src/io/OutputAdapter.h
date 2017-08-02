@@ -11,6 +11,7 @@
 
 
 class OutputAdapter {
+public:
   /**
    * Takes the output of a NeuralLayer and converts it
    * as specified by the derivative class to a desired output

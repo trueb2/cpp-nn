@@ -22,7 +22,8 @@ public:
   NeuralLayer(int neuronCount, int neuronLength, ActivationFunction* activationFunction);
 
   /**
-   * Free memory for each neuron as well the array holding their pointers
+   * Frees memory for each neuron as well the array holding their pointers.
+   * Frees memory for the artifacts if any was allocated.
    */
   ~NeuralLayer();
 
@@ -57,6 +58,17 @@ public:
    */
   std::string getActivationFunctionName();
 
+  /**
+   * Accepts an array of weights that are the same length as the neuronLength.
+   * Computes the output for each of the Neurons in the layer. Stores
+   * the results of the pass in a field member.
+   *
+   * @param input - The array to pass through the NeuralLayer
+   * @param inputLength - The length of the input, which must match the neuronLength
+   * @return output - The activated output of each Neuron in the layer
+   */
+  double *passForward(double *input, int inputLength);
+
 private:
   static int idCounter;
   int id;
@@ -65,6 +77,8 @@ private:
   int neuronLength;
   ActivationFunction* activationFunction;
   Neuron** neurons;
+
+  double* artifacts;
 };
 
 

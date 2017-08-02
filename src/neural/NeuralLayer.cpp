@@ -2,6 +2,7 @@
 // Created by jwtrueb on 8/1/17.
 //
 
+#include <cassert>
 #include "NeuralLayer.h"
 
 int NeuralLayer::idCounter = 0;
@@ -15,6 +16,7 @@ NeuralLayer::NeuralLayer(int neuronCount, int neuronLength, ActivationFunction *
   }
 
   id = idCounter++;
+  artifacts = nullptr;
 }
 
 NeuralLayer::~NeuralLayer() {
@@ -23,6 +25,10 @@ NeuralLayer::~NeuralLayer() {
   }
 
   delete [] neurons;
+
+  if(artifacts != nullptr) {
+    delete artifacts;
+  }
 }
 
 void NeuralLayer::resetIdCounter() {
@@ -43,4 +49,20 @@ int NeuralLayer::getNeuronLength() {
 
 std::string NeuralLayer::getActivationFunctionName() {
   return activationFunction->getName();
+}
+
+double * NeuralLayer::passForward(double* input, int inputLength) {
+  assert(neuronLength == inputLength);
+
+  if(artifacts != nullptr) {
+    delete artifacts;
+  }
+
+  artifacts = new double[neuronCount];
+  double* retArtifacts = new double[neuronCount];
+  for(int i = 0; i < neuronCount; i++) {
+    artifacts[i] = retArtifacts[i] = neurons[i]->dot(input, inputLength);
+  }
+
+  return retArtifacts;
 }
