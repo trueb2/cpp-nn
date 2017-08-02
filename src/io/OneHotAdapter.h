@@ -33,12 +33,25 @@ public:
    * resulting vector, while the rest will be set to false.
    *
    * @param neuralLayerOutput - result from each Neuron in NeuralLayer
-   * @return oneHot - bool* of length this->length
+   * @return oneHot - double* of length this->length
    */
   void* transform(double* neuralLayerOutput, int neuronCount);
 
+  /**
+   * Computes the margin of error for each index of the OneHotAdapter
+   * transform output.
+   *
+   * @param outputAdapterOutput - A double* array of output from transform
+   * @param truthOutput - A double* array of truth
+   * @param outputLength - The length of outputAdapterOutput, truthOutput, and error
+   * @return error - A double* array of margin of error on each index
+   */
+  void *outputError(void *outputAdapterOutput, void *truthOutput, int outputLength);
+
+
 private:
   int length;
+
 };
 
 

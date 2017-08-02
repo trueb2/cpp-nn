@@ -20,6 +20,17 @@ public:
    * @return transformedOutput - The desired output format
    */
   virtual void* transform(double* neuralLayerOutput, int neuronCount) = 0;
+
+  /**
+   * Takes output from the transform function and a truth output, then
+   * computes the margin of error.
+   *
+   * @param outputAdapterOutput - A value returned by transform
+   * @param truthOutput - The correct output
+   * @param outputLength - The length of the output if returning array
+   * @return error - The margin of error on the output
+   */
+  virtual void *outputError(void *outputAdapterOutput, void *truthOutput, int outputLength) = 0;
 };
 
 

@@ -8,17 +8,21 @@
 OneHotAdapter::OneHotAdapter(int length) : length(length) {};
 
 void* OneHotAdapter::transform(double *neuralLayerOutput, int neuronCount) {
-  int maxIdx = -1;
-  int maxVal = -DBL_MAX;
+  double* output = new double[neuronCount];
   for(int i = 0; i < neuronCount; i++) {
-    if(neuralLayerOutput[i] > maxVal) {
-      maxIdx = 0;
-      maxVal = neuralLayerOutput[i];
-    }
+    output[i] = neuralLayerOutput[i];
+  }
+  return output;
+}
+
+void * OneHotAdapter::outputError(void *outputAdapterOutput, void *truthOutput, int outputLength) {
+  double* error = new double[outputLength];
+
+  double* calculated = (double*) outputAdapterOutput;
+  double* target = (double*) truthOutput;
+  for(int i = 0; i < outputLength; i++) {
+    error[i] = target[i] - calculated[i];
   }
 
-  bool* oneHot = new bool[neuronCount];
-  for(int i = 0; i < neuronCount; i++) {
-      oneHot[i] = (i == maxIdx);
-  }
+  return (void*) error;
 }

@@ -12,7 +12,7 @@
 
 #include "NeuralLayer.h"
 #include "../io/OutputAdapter.h"
-#include "InputNeuron.h"
+#include "../io/Input.h"
 
 class NeuralNetwork {
 public:
@@ -38,10 +38,10 @@ public:
    * Updates the weights of the neurons in the NeuralLayers
    * using back propagation.
    *
-   * @param inputNeurons - An array of input neurons
-   * @param inputNeuronsLength - The number of inputs in inputNeurons
+   * @param inputs - An array of input neurons
+   * @param inputsLength - The number of inputs in inputs
    */
-  void train(InputNeuron** inputNeurons, int inputNeuronsLength);
+  void train(Input** inputs, int inputsLength);
 
   /**
    * Evaluates the neural network for a single input
@@ -50,7 +50,7 @@ public:
    * @return output - The ouput computed and wrangled
    * by the NeuralNetwork and OutputAdapter
    */
-  void* evaluate(InputNeuron* input);
+  void* evaluate(Input* input);
 
   /**
    * Returns the number of layers within the NeuralNetwork.

@@ -25,19 +25,26 @@ NeuralNetwork::~NeuralNetwork() {
   delete [] neuralLayers;
 }
 
-void NeuralNetwork::train(InputNeuron** inputNeurons, int inputNeuronsLength) {
-
+void NeuralNetwork::train(Input** inputs, int inputsLength) {
+  for(int i = 0; i < inputsLength; i++) {
+    // Get the next input
+    Input* input = inputs[i];
+    // Compute the output of the network on the input
+    void* output = evaluate(input);
+    // Compute the error on the input
+    void* error = outputAdapter->outputError(output, input->getTarget());
+  }
   //TODO:: Call Evaluate
 
   //TODO: Use Back Propagation
 }
 
-void* NeuralNetwork::evaluate(InputNeuron* inputNeuron) {
-  assert(inputNeuron->getLength() == neuralLayers[0]->getNeuronLength());
+void* NeuralNetwork::evaluate(Input* input) {
+  assert(input->getLength() == neuralLayers[0]->getNeuronLength());
 
   // Forward Propagation
-  double* input = inputNeuron->copyWeights();
-  int inputLength = inputNeuron->getLength();
+  double* input = input->copyWeights();
+  int inputLength = input->getLength();
   for(int i = 0; i < layerCount; i++) {
     double* output = neuralLayers[i]->passForward(input, inputLength);
     delete input;
