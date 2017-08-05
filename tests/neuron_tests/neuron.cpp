@@ -59,7 +59,7 @@ namespace {
 
   TEST_F(NeuronTest, CannotSetWeigthsToEmpty) {
     double weights[] = {};
-    EXPECT_DEATH(neuron->setWeights(weights, 0), "Assertion `length > 0' failed");
+    EXPECT_DEATH(neuron->setWeights(weights, 0), "Assertion failed");
   }
 
   TEST_F(NeuronTest, CanDotWeightsWithNeuron) {
@@ -75,7 +75,7 @@ namespace {
     double w2[] = { 5.0, 6.0, 7.0, 8.0, 9.0};
 
     neuron->setWeights(w1, 4);
-    EXPECT_DEATH(neuron->dot(w2, 5), "Assertion `this->getLength\\(\\) == length' failed");
+    EXPECT_DEATH(neuron->dot(w2, 5), "Assertion failed");
   }
 
   TEST_F(NeuronTest, HasUniqueIds) {
