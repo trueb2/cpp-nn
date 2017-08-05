@@ -3,6 +3,8 @@
 //
 
 #include <cassert>
+#include "layers/NeuralLayer.h"
+#include "../io/OutputAdapter.h"
 #include "NeuralNetwork.h"
 
 NeuralNetwork::NeuralNetwork(NeuralLayer** neuralLayers, int layerCount, OutputAdapter* outputAdapter)
@@ -15,6 +17,7 @@ NeuralNetwork::NeuralNetwork(NeuralLayer** neuralLayers, int layerCount, OutputA
     assert(count == neuralLayer->getNeuronLength());
     count = neuralLayer->getNeuronCount();
   }
+  assert(typeid(*neuralLayers[layerCount-1]).name() == "OutputLayer");
 }
 
 NeuralNetwork::~NeuralNetwork() {
@@ -28,12 +31,24 @@ void NeuralNetwork::train(Input** inputs, int inputsLength) {
   for (int i = 0; i < inputsLength; i++) {
     // Get the next input
     Input* input = inputs[i];
+
     // Compute the output of the network on the input
     void* output = evaluate(input);
+
     // Compute the error on the input
     void* error = outputAdapter->outputError(output, input->getLabels(), input->getLabelsLength());
 
-    //TODO: Use Back Propagation
+    // Compute update rules from each layer
+    NeuralLayer* nextLayer = nullptr;
+    for(int i = layerCount - 1; i > -1; i--) {
+      neuralLayers[i]->calcUpdateRules(nextLayer, (double*) error);
+      nextLayer = neuralLayers[i];
+    }
+
+    // Apply update rules
+    for(int i = 0; i < layerCount; i++) {
+      neuralLayers[i]->applyUpdates();
+    }
   }
 }
 

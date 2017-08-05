@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include "../../src/neural/NeuralLayer.h"
+#include "../../src/neural/layers/NeuralLayer.h"
 #include "../../src/functions/SigmoidFunction.h"
 
 namespace {

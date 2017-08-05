@@ -10,7 +10,7 @@
 #define CPPNN_NEURALNETWORK_H
 
 
-#include "NeuralLayer.h"
+#include "layers/NeuralLayer.h"
 #include "../io/OutputAdapter.h"
 #include "../io/Input.h"
 
