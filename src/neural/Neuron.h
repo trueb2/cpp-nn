@@ -69,6 +69,13 @@ public:
    */
   ~Neuron();
 
+  /**
+   * Adds the values to the weights of the neuron.
+   *
+   * @param values - The amounts to be added to the weights
+   */
+  void addToWeights(const double* values);
+
 protected:
   static int idCounter;
   int id;
@@ -76,7 +83,6 @@ protected:
 
   double* weights;
   int length;
-
 };
 
 

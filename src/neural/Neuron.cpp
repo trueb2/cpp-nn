@@ -64,3 +64,9 @@ double Neuron::dot(const double* weights, const int length) {
 
   return inner_dot_product;
 }
+
+void Neuron::addToWeights(const double* values) {
+  for(int i = 0; i < length; i++) {
+    weights[i] += values[i];
+  }
+}

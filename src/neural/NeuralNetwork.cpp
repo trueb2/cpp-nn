@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include "layers/NeuralLayer.h"
+#include "layers/OutputLayer.h"
 #include "../io/OutputAdapter.h"
 #include "NeuralNetwork.h"
 
@@ -17,7 +18,7 @@ NeuralNetwork::NeuralNetwork(NeuralLayer** neuralLayers, int layerCount, OutputA
     assert(count == neuralLayer->getNeuronLength());
     count = neuralLayer->getNeuronCount();
   }
-  assert(typeid(*neuralLayers[layerCount-1]).name() == "OutputLayer");
+  assert(typeid(*neuralLayers[layerCount-1]) == typeid(OutputLayer));
 }
 
 NeuralNetwork::~NeuralNetwork() {
@@ -41,7 +42,7 @@ void NeuralNetwork::train(Input** inputs, int inputsLength) {
     // Compute update rules from each layer
     NeuralLayer* nextLayer = nullptr;
     for(int i = layerCount - 1; i > -1; i--) {
-      neuralLayers[i]->calcUpdateRules(nextLayer, (double*) error);
+      neuralLayers[i]->findUpdateRules(nextLayer, (double*) error);
       nextLayer = neuralLayers[i];
     }
 

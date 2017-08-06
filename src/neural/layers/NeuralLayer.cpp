@@ -20,6 +20,11 @@ NeuralLayer::NeuralLayer(int neuronCount, int neuronLength, ActivationFunction* 
   outputs = new double[neuronCount];
   activatedOutputs = new double[neuronCount];
   deltas = new double[neuronCount];
+
+  updateRules = new double*[neuronCount];
+  for(int i = 0; i < neuronCount; i++) {
+    updateRules[i] = new double[neuronLength];
+  }
 }
 
 NeuralLayer::~NeuralLayer() {
@@ -32,6 +37,11 @@ NeuralLayer::~NeuralLayer() {
   delete[] outputs;
   delete[] activatedOutputs;
   delete[] deltas;
+
+  for( int i = 0; i < neuronCount; i++) {
+    delete[] updateRules[i];
+  }
+  delete updateRules;
 }
 
 void NeuralLayer::resetIdCounter() {
@@ -81,29 +91,28 @@ double* NeuralLayer::passForward(double* input, int inputLength) {
   return out;
 }
 
-double* NeuralLayer::calcUpdateRules(NeuralLayer* nextLayer, double* outputError) {
+void NeuralLayer::calcUpdateRules(NeuralLayer* nextLayer, double* outputError) {
   // Output Error is only useful for the OutputLayer
   (void)outputError;
 
-  // Update the deltas array
+  // Update a delta value for each neuron in the hidden layer
   double* outputDerivatives = new double[neuronCount];
   for(int i = 0; i < neuronCount; i++) {
     outputDerivatives[i] = activationFunction->evaluateDerivative(inputs[i]);
     double sum = 0.0;
-    for(int j = 0; j < nextLayer->getNeuronCount(); j++) {
+    for(int j = 0; j < nextLayer->neuronCount; j++) {
       sum += nextLayer->deltas[j] * nextLayer->getNeuronWeight(j, i);
     }
     deltas[i] = outputDerivatives[i] * sum;
   }
   delete[] outputDerivatives;
 
-  // Calculate the update rules using the deltas and the inputs
-  double* updateRules = new double[neuronCount];
+  // Use the deltas to calculate update rules for each neuron's weights
   for(int i = 0; i < neuronCount; i++) {
-    updateRules[i] = /* learning_rate */ deltas[i] * activatedOutputs[i];
+    for(int j = 0; j < neuronLength; j++) {
+      updateRules[i][j] = deltas[i] * inputs[j];
+    }
   }
-
-  return updateRules;
 }
 
 double NeuralLayer::getNeuronWeight(int neuronIdx, int weightIdx) const {
@@ -113,6 +122,12 @@ double NeuralLayer::getNeuronWeight(int neuronIdx, int weightIdx) const {
 void NeuralLayer::copyToMember(double* member, const double* data) {
   for(int i = 0; i < neuronLength; i++) {
     member[i] = data[i];
+  }
+}
+
+void NeuralLayer::applyUpdates() {
+  for(int i = 0; i < neuronCount; i++) {
+    neurons[i]->addToWeights(updateRules[i]);
   }
 }
 

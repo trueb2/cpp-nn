@@ -72,14 +72,25 @@ public:
 
   /**
    * Calculates the updates for the weights of the NeuralLayer depending on the
-   * next layer or output error of the network. This process produces artifacts that are necessary
+   * next layer. This process produces artifacts that are necessary
    * for the preceding NeuralLayer to compute its update rules.
    *
+   * The update rules are stored in an m x n array, where there are m neurons in the previous layer
+   * that lead to n neurons in the output layer. An updateRules[i][j] value represents the change
+   * in weight to the jth index of the weights of the ith neuron in the OutputLayer.
+   *
    * @param nextLayer - The next layer in the neural network that is necessary for backpropagation
-   * @param outputError - The error of the neural network on an input's truth
-   * @return deltaWeights - The change in weights for this NeuralLayer
+   * @param outputError - Unused param from a non output layer
    */
-  virtual double* calcUpdateRules(NeuralLayer* nextLayer, double* outputError);
+  virtual void calcUpdateRules(NeuralLayer* nextLayer, double* outputError);
+
+  /**
+   * Applies the calculated update rules to the weights of the neurons
+   * in this NeuralLayer.
+   *
+   * calcUpdateRules should be called prior to this method each time.
+   */
+  void applyUpdates();
 
 protected:
   static int idCounter;
@@ -94,6 +105,7 @@ protected:
   double* outputs;
   double* activatedOutputs;
   double* deltas;
+  double** updateRules;
 
   /**
    * Looks up the weight by index from a neuron by index in this NeuralLayer.

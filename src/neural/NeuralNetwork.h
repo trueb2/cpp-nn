@@ -34,7 +34,7 @@ public:
   ~NeuralNetwork();
 
   /**
-   * Evaluates the output for an array of InputNeurons.
+   * Performs a training iteration on the array of inputs provided.
    * Updates the weights of the neurons in the NeuralLayers
    * using back propagation.
    *

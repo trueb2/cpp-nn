@@ -7,6 +7,7 @@
 #include "../../src/neural/NeuralNetwork.h"
 #include "../../src/functions/SigmoidFunction.h"
 #include "../../src/io/OneHotAdapter.h"
+#include "../../src/neural/layers/OutputLayer.h"
 
 namespace {
   //The fixture for testing class Neuron
@@ -34,7 +35,7 @@ namespace {
   TEST_F(NeuralNetworkTest, CanCreateNeuralNetworkWithOneLayer) {
     NeuralLayer** nls = new NeuralLayer*[1];
     SigmoidFunction* s = new SigmoidFunction();
-    nls[0] = new NeuralLayer(5,10,s);
+    nls[0] = new OutputLayer(5,10,s);
     OneHotAdapter oha(5);
 
     NeuralNetwork* nn = new NeuralNetwork(nls, 1, &oha);
@@ -49,7 +50,7 @@ namespace {
     OneHotAdapter oha(5);
     nls[0] = new NeuralLayer(5, 10, &s);
     nls[1] = new NeuralLayer(4, 5, &s);
-    nls[2] = new NeuralLayer(3, 4, &s);
+    nls[2] = new OutputLayer(3, 4, &s);
 
     NeuralNetwork* nn = new NeuralNetwork(nls, 3, &oha);
     ASSERT_EQ(3, nn->getLayerCount());
@@ -61,7 +62,7 @@ namespace {
     SigmoidFunction s;
     OneHotAdapter oha(20);
     nls[0] = new NeuralLayer(20,10,&s);
-    nls[0] = new NeuralLayer(20,10,&s);
+    nls[0] = new OutputLayer(20,10,&s);
 
     NeuralNetwork *nn = nullptr;
     // TODO: find out why assertion fails without message

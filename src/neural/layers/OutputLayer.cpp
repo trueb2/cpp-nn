@@ -8,21 +8,20 @@
 OutputLayer::OutputLayer(int neuronCount, int neuronLength, ActivationFunction* activationFunction)
     : NeuralLayer(neuronCount, neuronLength, activationFunction) {}
 
-double* OutputLayer::calcUpdateRules(NeuralLayer* nextLayer, double* outputError) {
-  // There is not another layer
+void OutputLayer::calcUpdateRules(NeuralLayer* nextLayer, double* outputError) {
+  // There is not a next NeuralLayer
   (void) nextLayer;
 
-  // Populate deltas
+  // Populate a delta for each output neuron
   for(int i = 0; i < neuronCount; i++) {
     double activationDerivative = activationFunction->evaluateDerivative(inputs[i]);
     deltas[i] = outputError[i] * activationDerivative;
   }
 
-  // Compute output layer update rules
-  double* updateRules = new double[neuronCount];
+  // Compute update rules for each neuron in the OutputLayer
   for(int i = 0; i < neuronCount; i++) {
-    updateRules[i] = deltas[i] * inputs[i];
+    for(int j = 0; j < neuronLength; j++) {
+      updateRules[i][j] = deltas[i] * inputs[j];
+    }
   }
-
-  return updateRules;
 }

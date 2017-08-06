@@ -29,11 +29,14 @@ public:
    * It relies on the outputError that is previously computed, and does not use the nextLayer.
    * It updates the values in the deltas field member.
    *
+   * The update rules are stored in an m x n array, where there are m neurons in the previous layer
+   * that lead to n neurons in the output layer. An updateRules[i][j] value represents the change
+   * in weight to the jth index of the weights of the ith neuron in the OutputLayer.
+   *
    * @param nextLayer - Unused param for the output layer
    * @param outputError - The difference between the truth and actual outputs of the neural network
-   * @return updateRules - The changes to be made to the updates for this OutputLayer
    */
-  double* calcUpdateRules(NeuralLayer* nextLayer, double* outputError) override;
+  void calcUpdateRules(NeuralLayer* nextLayer, double* outputError) override;
 };
 
 
