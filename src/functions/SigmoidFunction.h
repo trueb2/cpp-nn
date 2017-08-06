@@ -16,7 +16,7 @@ public:
    * @param arg - argument for the sigmoid function
    * @return [0,1] - double between 0 and 1
    */
-  double evaluate(double arg);
+  double evaluate(double arg) override;
 
   /**
    * Computes the derivative of the Sigmoid function for
@@ -26,14 +26,14 @@ public:
    * @return derivative - The value of the derivative of the Sigmoid
    * value at arg's evaluation point
    */
-  double evaluateDerivative(double arg);
+  double evaluateDerivative(double arg) override;
 
   /**
    * Get the string "Sigmoid" as the name of this activation function
    *
    * @return name - The name of this activation function
    */
-  std::string getName();
+  std::string getName() override;
 };
 
 

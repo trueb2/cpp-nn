@@ -7,7 +7,7 @@
 OneHotAdapter::OneHotAdapter(int length) : length(length) {};
 
 void* OneHotAdapter::transform(double *neuralLayerOutput, int neuronCount) {
-  double* output = new double[neuronCount];
+  auto output = new double[neuronCount];
   for(int i = 0; i < neuronCount; i++) {
     output[i] = neuralLayerOutput[i];
   }
@@ -15,10 +15,10 @@ void* OneHotAdapter::transform(double *neuralLayerOutput, int neuronCount) {
 }
 
 void * OneHotAdapter::outputError(void* outputAdapterOutput, void* targetOutput, int outputLength) {
-  double* error = new double[outputLength];
+  auto error = new double[outputLength];
 
-  double* calculated = (double*) outputAdapterOutput;
-  double* target = (double*) targetOutput;
+  auto calculated = (double*) outputAdapterOutput;
+  auto target = (double*) targetOutput;
   for(int i = 0; i < outputLength; i++) {
     error[i] = target[i] - calculated[i];
   }

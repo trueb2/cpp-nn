@@ -59,7 +59,7 @@ public:
   /**
    * Resets the idCounter static member to 0.
    */
-  void resetIdCounter();
+  static void resetIdCounter();
 
 public:
   static int idCounter;

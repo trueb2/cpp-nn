@@ -41,14 +41,14 @@ void NeuralNetwork::train(Input** inputs, int inputsLength) {
 
     // Compute update rules from each layer
     NeuralLayer* nextLayer = nullptr;
-    for(int i = layerCount - 1; i > -1; i--) {
-      neuralLayers[i]->findUpdateRules(nextLayer, (double*) error);
-      nextLayer = neuralLayers[i];
+    for(int j = layerCount - 1; j > -1; j--) {
+      neuralLayers[j]->findUpdateRules(nextLayer, (double*) error);
+      nextLayer = neuralLayers[j];
     }
 
     // Apply update rules
-    for(int i = 0; i < layerCount; i++) {
-      neuralLayers[i]->applyUpdates();
+    for(int j = 0; j < layerCount; j++) {
+      neuralLayers[j]->applyUpdates();
     }
   }
 }

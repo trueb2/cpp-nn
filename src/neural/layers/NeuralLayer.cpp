@@ -72,7 +72,7 @@ double* NeuralLayer::passForward(double* input, int inputLength) {
   copyToMember(inputs, input);
 
   // Dot the input with each neuron
-  double* out = new double[neuronCount];
+  auto out = new double[neuronCount];
   for (int i = 0; i < neuronCount; i++) {
     out[i] = neurons[i]->dot(input, inputLength);
   }
@@ -96,7 +96,7 @@ void NeuralLayer::findUpdateRules(NeuralLayer* nextLayer, double* outputError) {
   (void)outputError;
 
   // Update a delta value for each neuron in the hidden layer
-  double* outputDerivatives = new double[neuronCount];
+  auto outputDerivatives = new double[neuronCount];
   for(int i = 0; i < neuronCount; i++) {
     outputDerivatives[i] = activationFunction->evaluateDerivative(inputs[i]);
     double sum = 0.0;
