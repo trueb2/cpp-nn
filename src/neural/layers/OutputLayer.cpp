@@ -8,7 +8,7 @@
 OutputLayer::OutputLayer(int neuronCount, int neuronLength, ActivationFunction* activationFunction)
     : NeuralLayer(neuronCount, neuronLength, activationFunction) {}
 
-void OutputLayer::calcUpdateRules(NeuralLayer* nextLayer, double* outputError) {
+void OutputLayer::findUpdateRules(NeuralLayer* nextLayer, double* outputError) {
   // There is not a next NeuralLayer
   (void) nextLayer;
 

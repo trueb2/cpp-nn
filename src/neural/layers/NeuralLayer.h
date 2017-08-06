@@ -82,7 +82,7 @@ public:
    * @param nextLayer - The next layer in the neural network that is necessary for backpropagation
    * @param outputError - Unused param from a non output layer
    */
-  virtual void calcUpdateRules(NeuralLayer* nextLayer, double* outputError);
+  virtual void findUpdateRules(NeuralLayer* nextLayer, double* outputError);
 
   /**
    * Applies the calculated update rules to the weights of the neurons

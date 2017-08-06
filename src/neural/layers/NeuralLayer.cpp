@@ -91,7 +91,7 @@ double* NeuralLayer::passForward(double* input, int inputLength) {
   return out;
 }
 
-void NeuralLayer::calcUpdateRules(NeuralLayer* nextLayer, double* outputError) {
+void NeuralLayer::findUpdateRules(NeuralLayer* nextLayer, double* outputError) {
   // Output Error is only useful for the OutputLayer
   (void)outputError;
 

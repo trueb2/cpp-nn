@@ -36,7 +36,7 @@ public:
    * @param nextLayer - Unused param for the output layer
    * @param outputError - The difference between the truth and actual outputs of the neural network
    */
-  void calcUpdateRules(NeuralLayer* nextLayer, double* outputError) override;
+  void findUpdateRules(NeuralLayer* nextLayer, double* outputError) override;
 };
 
 
