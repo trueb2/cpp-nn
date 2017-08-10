@@ -21,8 +21,8 @@ mid = sum([.5**(i+1) for i in range(num_features)])
 labels = (sums > mid).astype(bool)
 
 # Save the examples and labels
-np.savetxt("../data/poly_examples_%s_%s" % (num_examples, num_features), examples, delimiter=',')
-np.savetxt("../data/poly_labels_%s_%s" % (num_examples, num_features), labels.astype(int), delimiter=',', fmt="%d")
+np.savetxt("../data_tmp/poly_examples_%s_%s" % (num_examples, num_features), examples, delimiter=',')
+np.savetxt("../data_tmp/poly_labels_%s_%s" % (num_examples, num_features), labels.astype(int), delimiter=',', fmt="%d")
 
 if(num_features == 2):
     labels.shape = (num_examples,)
@@ -31,4 +31,4 @@ if(num_features == 2):
     fig = plt.figure()
     plt.scatter(pos_examples[:,0], pos_examples[:,1])
     plt.scatter(neg_examples[:,0], neg_examples[:,1])
-    fig.savefig("../data/poly_plot_%s_%s.png" % (num_examples, num_features))
+    fig.savefig("../data_tmp/poly_plot_%s_%s.png" % (num_examples, num_features))
