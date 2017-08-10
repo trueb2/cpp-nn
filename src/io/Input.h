@@ -11,7 +11,8 @@
 #define CPPNN_INPUT_H
 
 
-#include <gdbm.h>
+#include <string>
+#include <vector>
 
 class Input {
 public:
@@ -24,6 +25,15 @@ public:
    * @param labelsLength - The length of the labels array
    */
   Input(double* data, int dataLength, double* labels, int labelsLength);
+
+  /**
+   * Accepting a vector of strings representing double data values.
+   *
+   * The data and dataLength field member variables are created from the
+   * vector argument, while labels and labelsLength must be set later using
+   * setLabels()
+   */
+  Input(std::vector<std::string> strData);
 
   /**
    * Frees space allocated by InputNeuron
@@ -61,7 +71,16 @@ public:
    */
   static void resetIdCounter();
 
-public:
+  /**
+   * A vector of labels for the example that will be stored for the
+   * Input and compared for training purposes.
+   *
+   * @param vector - The labels in string form to be interpreted as doubles
+   */
+  void setLabels(std::vector<std::string> vector);
+
+
+protected:
   static int idCounter;
   int id;
 
@@ -69,6 +88,9 @@ public:
   double* labels;
   int dataLength;
   int labelsLength;
+
+private:
+  friend std::ostream& operator<<(std::ostream& strm, const Input& input);
 };
 
 
