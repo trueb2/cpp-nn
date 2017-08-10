@@ -19,9 +19,9 @@ Dataset::Dataset(Separability separability1, int numExamples, int numFeatures)
   examplesFileName = ss.str();
   std::ifstream examplesFile(examplesFileName);
   if(examplesFile.good()) {
-    std::cout << "Dataset examples are located at " << examplesFileName << std::endl;
+//    std::cout << "Dataset examples are located at " << examplesFileName << std::endl;
   } else {
-    std::cout << "Failed to find Dataset examples located at " << examplesFileName << std::endl;
+//    std::cout << "Failed to find Dataset examples located at " << examplesFileName << std::endl;
   }
 
   // Check that {separability}_labels_{numExamples}_{numFeatures} exists
@@ -30,9 +30,9 @@ Dataset::Dataset(Separability separability1, int numExamples, int numFeatures)
   labelsFileName = ss.str();
   std::ifstream labelsFile(labelsFileName);
   if(examplesFile.good()) {
-    std::cout << "Dataset labels are located at " << labelsFileName << std::endl << std::endl;
+//    std::cout << "Dataset labels are located at " << labelsFileName << std::endl << std::endl;
   } else {
-    std::cout << "Failed to find Dataset labels located at " << labelsFileName << std::endl;
+//    std::cout << "Failed to find Dataset labels located at " << labelsFileName << std::endl;
   }
 
   // Load the data
@@ -117,4 +117,8 @@ Input** Dataset::getExamples() {
 
 int Dataset::getNumExamples() {
   return numExamples;
+}
+
+int Dataset::getOutputLength() {
+  return examples[0]->getLabelsLength();
 }

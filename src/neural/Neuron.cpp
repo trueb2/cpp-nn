@@ -40,6 +40,12 @@ void Neuron::setWeights(const double* weights, const int length) {
   this->length = length;
 }
 
+void Neuron::setWeights(double fillWeight) {
+  for(int i = 0; i < length; i++) {
+    weights[i] = fillWeight;
+  }
+}
+
 double* Neuron::getWeights() {
   return weights;
 }
@@ -70,3 +76,4 @@ void Neuron::addToWeights(const double* values) {
     weights[i] += values[i];
   }
 }
+

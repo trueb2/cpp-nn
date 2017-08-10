@@ -19,7 +19,7 @@ public:
    * @param neuralLayerOutput - The output of a NeuralLayer
    * @return transformedOutput - The desired output format
    */
-  virtual void* transform(double* neuralLayerOutput, int neuronCount) = 0;
+  virtual double* transform(double* neuralLayerOutput, int neuronCount) = 0;
 
   /**
    * Takes output from the transform function and a truth output, then
@@ -30,7 +30,7 @@ public:
    * @param outputLength - The length of the output if returning array
    * @return error - The margin of error on the output
    */
-  virtual void *outputError(void *outputAdapterOutput, void *truthOutput, int outputLength) = 0;
+  virtual double* outputError(double* outputAdapterOutput, double* truthOutput, int outputLength) = 0;
 };
 
 

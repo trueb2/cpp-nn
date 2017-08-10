@@ -36,6 +36,13 @@ public:
   void setWeights(const double * weights, const int length);
 
   /**
+   * setWeights - sets the weights of the Neuron to the value supplied
+   *
+   * @param fillWeight - The double assigned for every weight in the Neuron.
+   */
+  void setWeights(double fillWeight);
+
+  /**
    * getWeights() - returns the weights of the Neuron
    *
    * @return weights - The double array with the weights of the Neuron

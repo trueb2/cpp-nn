@@ -14,6 +14,7 @@ public:
   /**
    * Creates a NeuralLayer with neuronCount neurons that have length neuronLength.
    * The activation function for each of the layers is the ActivationFunction passed.
+   * All weights are initialized to 0.5
    *
    * @param neuronCount - The number of neurons in the layer
    * @param neuronLength - The length of the neurons in the layer

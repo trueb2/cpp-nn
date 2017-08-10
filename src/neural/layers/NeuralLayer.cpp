@@ -12,6 +12,7 @@ NeuralLayer::NeuralLayer(int neuronCount, int neuronLength, ActivationFunction* 
   neurons = new Neuron* [neuronCount];
   for (int i = 0; i < neuronCount; i++) {
     neurons[i] = new Neuron(neuronLength);
+    neurons[i]->setWeights(0.5);
   }
 
   id = idCounter++;

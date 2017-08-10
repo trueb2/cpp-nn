@@ -54,6 +54,11 @@ public:
    */
   int getNumExamples();
 
+  /**
+   * Gets the size of the output array from an Input
+   */
+  int getOutputLength();
+
 private:
   Input** examples;
 
